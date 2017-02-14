@@ -1,6 +1,5 @@
 wifi.setmode(wifi.STATION)
-wifi.sta.config("SSID","password")   ---   SSID and Password for your LAN DHCP here
-wifi.sta.connect()
+wifi.sta.config("SSID","password")
   print("System Info:  ")
   print("IP: ")
   print(wifi.sta.getip())
@@ -11,5 +10,4 @@ wifi.sta.connect()
     remaining, used, total=file.fsinfo()
     print("\nFile system info:\nTotal : "..total.." Bytes\nUsed : "..used.." Bytes\nRemain: "..remaining.." Bytes")
     print("\nReady")
-    dofile("servernode.lua")    --  calls servernode.lua  
-    
+    dofile("servernode.lua")

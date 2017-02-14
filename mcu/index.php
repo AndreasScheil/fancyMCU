@@ -77,10 +77,14 @@ echo "</tr>";
 
 echo "</table>";
 
+
+
 ?>
+
 </td>
 </tr>
 </table>
 <center> <font color = "#b0b0b0"> Bruce Reagan &copy; 2015
-
+<br><br><br>
+<a href="../index.php">back to fancyMCU</a>
 </html>
