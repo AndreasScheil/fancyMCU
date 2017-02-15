@@ -47,7 +47,7 @@ EOF;
 
         if ($entry != "." && $entry != ".." && $entry != "bak") {
 echo  <<<EOT
-            <tr><td><a href="index.php?ID=$_GET[ID]&file=$entry">$entry</a></td></tr>
+            <tr><td><a href="index.php?ID=$_GET[ID]&file=$entry">$entry</a></td><td><a href="file_actions.php?DEL=$_GET[ID]&file=$entry">remove</td></tr>
 EOT;
         }
     }
@@ -65,6 +65,7 @@ echo  <<<EOT
 			
 			</table>
 			<a href="index.php?mcu=mcu&id=$_GET[ID]&ip=$sqlip">Upload-Manager<a>
+			<a href="file_actions.php?ADD=$_GET[ID]">Add new file<a>
 			</div>
 <div class="col-md-8" style="height:100vh"> 
 EOT;
@@ -89,9 +90,9 @@ echo  <<<EOT
 
 	<form name="save" method="post" id="save" action="index.php">
 		<button type="button" class="btn btn-default btn-xs" name="bttn" id="bttn" value="$_GET[ID]">save</button>
-		<input type="hidden" name="id" value="1">
-		<input type="hidden" name="file" value="blink.lua">
-		<textarea id="area" name=txt></textarea>
+		<input type="hidden" name="id" value="$_GET[ID]">
+		<input type="hidden" name="file" value="$_GET[file]">
+		<textarea id="area" name=txt style="display:none;"></textarea>
 	</form>
 	<script>
 		var editor = ace.edit("editor");
@@ -138,7 +139,7 @@ echo  <<<EOT
 $_POST[txt]
 EOT;
 
-header("location:index.php");
+header("location:index.php?ID=$_POST[id]");
 exit();
 
 }
@@ -187,6 +188,7 @@ else{
 			<tr>
 				<th>Name</th>
 				<th>IP</th>
+				<th>Actions</th>
 			</tr>
 			
 <?php			
@@ -198,8 +200,9 @@ EOF;
    while($row = $ret->fetchArray(SQLITE3_ASSOC) ){
       echo  <<<EOT
 		<tr>
-			<td>$row[desc]</td>
-			<td><a href="index.php?ID=$row[id]"> $row[ip]  </a></td>
+			<td><a href="index.php?ID=$row[id]"> $row[desc]  </a></td>
+			<td>$row[ip]</td>
+			<td><a class="" href="#" >edit</a>|<a class="" href="device_actions.php?DEL=$row[id]" >remove</a></a></td>
 		</tr>
 EOT;
    }
@@ -208,6 +211,10 @@ EOT;
   
 			
 		</table>
+		<br>
+		<br>
+		<a class="btn btn-default btn-xs" href="device_actions.php?ADD=ADD" role="button">+ add new device</a>
+
 	</div>
 	<div class="col-md-4"> </div>
 
